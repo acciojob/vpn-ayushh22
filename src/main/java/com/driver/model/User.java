@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.util.List;
 
 @Entity
-@Table(name = "user_db")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

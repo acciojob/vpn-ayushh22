@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "admin_db")
+@Table(name = "admin")
 
 public class Admin {
     private int id;
