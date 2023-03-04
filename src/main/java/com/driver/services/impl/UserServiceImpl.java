@@ -1,5 +1,7 @@
 package com.driver.services.impl;
 
+import com.driver.model.ServiceProvider;
+import com.driver.model.User;
 import com.driver.repository.CountryRepository;
 import com.driver.repository.ServiceProviderRepository;
 import com.driver.repository.UserRepository;
@@ -24,6 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User subscribe(Integer userId, Integer serviceProviderId) {
+        User user= userRepository3.findById(userId).get();
+        ServiceProvider serviceProvider= serviceProviderRepository3.findById(serviceProviderId).get();
+        user.getServiceProviderList().add(serviceProvider);
+        serviceProvider.getUsers().add(user);
 
+        serviceProviderRepository3.save(serviceProvider);
+        return user;
     }
 }

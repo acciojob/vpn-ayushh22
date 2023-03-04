@@ -1,12 +1,6 @@
-import com.driver.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
-public class UserService {
-    @Autowired
-    UserRepository userRepository;
-    public void createUser(User user) {
-        userRepository.save(user);
-    }
+package com.driver.services;
+import com.driver.model.User;
+public interface UserService {
+    public User register(String username, String password, String countryName);
+    public User subscribe(Integer userId, Integer serviceProviderId);
 }

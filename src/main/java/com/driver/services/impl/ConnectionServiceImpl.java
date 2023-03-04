@@ -21,11 +21,26 @@ public class ConnectionServiceImpl implements ConnectionService {
 
     @Override
     public User connect(int userId, String countryName) throws Exception{
+        User user= new User();
+        user= userRepository2.findById().get();
 
+        if(user.getMaskedIp() !=null) {
+            throw new Exception("Already connected");
+        }
+        return user;
     }
     @Override
     public User disconnect(int userId) throws Exception {
+        User user= userRepository2.findById(userId).get();
 
+        if(user.getConnected()== false)
+            throw new Exception("Already disconnected");
+        else {
+            user.setConnected(false);
+            user.setMaskedIp(null);
+            userRepository2.save(user);
+            return user;
+        }
     }
     @Override
     public User communicate(int senderId, int receiverId) throws Exception {
