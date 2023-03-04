@@ -15,22 +15,14 @@ public class ServiceProvider {
     private List<User> users;
     @OneToMany(mappedBy = "serviceProvider", cascade = CascadeType.ALL)
     private List<Country> countryList;
-    private List<Connection> connections;
+    @OneToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL)
+    private List<Connection> connectionList;
 
     @ManyToOne
     @JoinColumn
     private Admin admin;
 
     public ServiceProvider() {
-    }
-
-    public ServiceProvider(int id, String name, List<User> users, List<Country> countryList, List<Connection> connections, Admin admin) {
-        this.id = id;
-        this.name = name;
-        this.users = users;
-        this.countryList = countryList;
-        this.connections = connections;
-        this.admin = admin;
     }
 
     public int getId() {
@@ -65,12 +57,12 @@ public class ServiceProvider {
         this.countryList = countryList;
     }
 
-    public List<Connection> getConnections() {
-        return connections;
+    public List<Connection> getConnectionList() {
+        return connectionList;
     }
 
-    public void setConnections(List<Connection> connections) {
-        this.connections = connections;
+    public void setConnectionList(List<Connection> connectionList) {
+        this.connectionList = connectionList;
     }
 
     public Admin getAdmin() {
