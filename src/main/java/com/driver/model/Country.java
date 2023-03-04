@@ -1,6 +1,7 @@
-// Note: Do not write @Enumerated annotation above CountryName in this model.
+package com.driver.model;// Note: Do not write @Enumerated annotation above CountryName in this model.
 
 import com.driver.model.CountryName;
+import com.driver.model.ServiceProvider;
 import jdk.internal.module.ServicesCatalog;
 import org.apache.catalina.User;
 
@@ -12,16 +13,27 @@ import javax.persistence.*;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
+
     CountryName countryName;
     String code;
-    User user;
 
-    public Country(int id, CountryName countryName, String code, User user) {
+    @OneToOne
+    private User user;
+
+    @ManyToOne
+    @JoinColumn
+    private ServiceProvider serviceProvider;
+
+    public Country(int id, CountryName countryName, String code, User user, ServiceProvider serviceProvider) {
         this.id = id;
         this.countryName = countryName;
         this.code = code;
         this.user = user;
+        this.serviceProvider = serviceProvider;
+    }
+
+    public Country() {
     }
 
     public int getId() {
@@ -54,5 +66,13 @@ public class Country {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
+
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 }

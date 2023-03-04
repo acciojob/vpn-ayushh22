@@ -11,16 +11,26 @@ public class ServiceProvider {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToMany(mappedBy = "serviceProviderList", cascade = CascadeType.ALL)
     private List<User> users;
+    @OneToMany(mappedBy = "serviceProvider", cascade = CascadeType.ALL)
     private List<Country> countryList;
     private List<Connection> connections;
 
-    public ServiceProvider(int id, String name, List<User> users, List<Country> countryList, List<Connection> connections) {
+    @ManyToOne
+    @JoinColumn
+    private Admin admin;
+
+    public ServiceProvider() {
+    }
+
+    public ServiceProvider(int id, String name, List<User> users, List<Country> countryList, List<Connection> connections, Admin admin) {
         this.id = id;
         this.name = name;
         this.users = users;
         this.countryList = countryList;
         this.connections = connections;
+        this.admin = admin;
     }
 
     public int getId() {
@@ -61,5 +71,13 @@ public class ServiceProvider {
 
     public void setConnections(List<Connection> connections) {
         this.connections = connections;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }

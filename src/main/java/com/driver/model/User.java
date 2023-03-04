@@ -15,9 +15,16 @@ public class User {
     private String maskedIp;
     private String originalIp;
     private Boolean connected;
+    @ManyToMany
+    @JoinColumn
     private List<ServiceProvider> serviceProviderList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Connection> connectionList;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Country country;
+
+    public User() {
+    }
 
     public User(int id, String username, String password, String maskedIp, String originalIp, Boolean connected, List<ServiceProvider> serviceProviderList, List<Connection> connectionList, Country country) {
         this.id = id;
